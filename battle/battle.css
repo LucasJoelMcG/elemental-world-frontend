@@ -1,0 +1,565 @@
+* {
+	overflow: hidden;
+}
+
+body {
+	background-image: url(../assets/background.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+/*COMIENZO de Estructura general ================================================*/
+.superior-half,
+.inferior-half {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 30vh;
+	width: 100vw;
+}
+
+.superior-half {
+	justify-content: flex-end;
+}
+
+.inferior-half {
+	justify-content: flex-start;
+}
+/*FINAL de Estructura general ================================================*/
+
+/*COMIENZO de Divider ================================================*/
+.divider {
+	display: block;
+	width: 100vw;
+	border-bottom: 1px solid black;
+}
+/*FINAL de Divider ================================================*/
+
+/*COMIENZO de Contenido de personajes ================================================*/
+.character-container,
+.adversary-container {
+	width: 40%;
+	height: 90%;
+	max-width: 450px;
+	background-color: #f8f8d9;
+	border: 1px solid black;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.character-container > :not(.character-content),
+.adversary-container > :not(.adversary-content) {
+	flex-shrink: 0;
+}
+
+.character-container > .character-content,
+.adversary-container > .adversary-content {
+	flex-grow: 1;
+}
+
+.character-health,
+.adversary-health {
+	background-color: white;
+	height: 5%;
+	padding: 1px;
+	border: 1px solid black;
+	border-radius: 20px;
+	margin: 0 16px;
+}
+
+.character-state,
+.character-information,
+.adversary-state,
+.adversary-information {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 5px 16px;
+}
+
+.character-condition,
+.adversary-condition {
+	font-size: 16px;
+	color: white;
+	font-weight: 700;
+	padding: 1px;
+	text-shadow: 1px 1px black;
+}
+
+.ENV {
+	background-color: #ba6dd0;
+	border-radius: 10px;
+}
+
+.PAR {
+	background-color: #baba1f;
+	border-radius: 10px;
+}
+
+.character-current-health {
+	border-radius: 20px;
+	position: relative;
+	height: 100%;
+	padding: 2.5px;
+	width: 70%;
+	background-color: green;
+}
+
+.adversary-current-health {
+	border-radius: 20px;
+	position: relative;
+	height: 100%;
+	padding: 2.5px;
+	width: 40%;
+	background-color: orange;
+}
+
+.character-content,
+.adversary-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: inherit;
+	overflow: hidden;
+}
+
+.adversary-sprite,
+.character-sprite {
+	position: relative;
+	height: 100%;
+	width: auto;
+	padding: 10px;
+}
+
+/*FINAL de Contenido de personajes ================================================*/
+
+/*COMIENZO de Sección Acciones ================================================*/
+.actions-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.message {
+	padding: 10px;
+	width: 45%;
+	height: 95%;
+	background-color: #6ea2a4;
+	border-radius: 20px;
+	color: white;
+	text-shadow: 2px 1px black;
+	font-size: 14px;
+}
+
+.actions {
+	width: 50%;
+	height: 100%;
+	background-color: white;
+	border: 3px solid black;
+}
+
+.action {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 600;
+	width: 50%;
+	height: 100%;
+}
+
+.arrow {
+	width: 20px;
+	height: 0;
+	border-top: 0px solid transparent;
+	border-bottom: 0px solid transparent;
+	border-left: 0px solid black;
+	padding-right: 10px;
+}
+
+.active {
+	width: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid black;
+
+	animation: blink-animation 1.5s steps(5, start) infinite;
+	-webkit-animation: blink-animation 1.5s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+	to {
+		visibility: hidden;
+	}
+}
+@-webkit-keyframes blink-animation {
+	to {
+		visibility: hidden;
+	}
+}
+/*FINAL de Sección Acciones ==================================================*/
+
+/*COMIENZO de Controls ================================================*/
+.controls {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+	height: 25vh;
+	width: 100vw;
+	background-color: black;
+}
+
+.actions-container {
+	width: 100vw;
+	height: 15vh;
+	background-color: red;
+	border-radius: 20px;
+}
+
+.d-pad {
+	display: flex;
+	height: 50px;
+	width: 50px;
+	background-color: white;
+}
+
+.buttons {
+	display: flex;
+	height: 50px;
+	width: 50px;
+	background-color: white;
+}
+
+/*COMIENZO de D-PAD ==================================================*/
+.set {
+	overflow: hidden;
+	text-align: center;
+}
+.set .d-pad {
+	margin-right: 40px;
+}
+.set .d-pad,
+.set .buttons-pad {
+	display: inline-block;
+}
+.d-pad {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	border-radius: 48%;
+	background-color: black;
+	overflow: hidden;
+}
+.d-pad:before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 5%;
+	transform: translate(-50%, -50%);
+	width: 66.6%;
+	height: 66.6%;
+	background: black;
+}
+.d-pad:after {
+	content: "";
+	position: absolute;
+	display: none;
+	z-index: 2;
+	width: 20%;
+	height: 20%;
+	top: 50%;
+	left: 50%;
+	background: #ddd;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.25s;
+	cursor: pointer;
+}
+.d-pad:hover:after {
+	width: 30%;
+	height: 30%;
+}
+.d-pad a {
+	display: block;
+	position: absolute;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	width: 33.3%;
+	height: 43%;
+	line-height: 40%;
+	color: #fff;
+	background: #ddd;
+	text-align: center;
+}
+.d-pad a:hover {
+	background: #eee;
+}
+.d-pad a:before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-radius: 5px;
+	border-style: solid;
+	transition: all 0.25s;
+}
+.d-pad a:after {
+	content: "";
+	position: absolute;
+	width: 102%;
+	height: 78%;
+	background: #fff;
+	border-radius: 20%;
+}
+.d-pad a.left,
+.d-pad a.right {
+	width: 43%;
+	height: 33%;
+}
+.d-pad a.left:after,
+.d-pad a.right:after {
+	width: 78%;
+	height: 102%;
+}
+.d-pad a.up {
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+	border-radius: 17% 17% 50% 50%;
+}
+.d-pad a.up:hover {
+	background: linear-gradient(0deg, #ddd 0%, #eee 50%);
+}
+.d-pad a.up:after {
+	left: 0;
+	top: 0;
+	transform: translate(-100%, 0);
+	border-top-left-radius: 50%;
+	pointer-events: none;
+}
+.d-pad a.up:before {
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-width: 0 13px 19px 13px;
+	border-color: transparent transparent #aaa transparent;
+}
+.d-pad a.up:active:before {
+	border-bottom-color: #333;
+}
+.d-pad a.up:hover:before {
+	top: 35%;
+}
+.d-pad a.down {
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+	border-radius: 50% 50% 17% 17%;
+}
+.d-pad a.down:hover {
+	background: linear-gradient(180deg, #ddd 0%, #eee 50%);
+}
+.d-pad a.down:after {
+	right: 0;
+	bottom: 0;
+	transform: translate(100%, 0);
+	border-bottom-right-radius: 50%;
+	pointer-events: none;
+}
+.d-pad a.down:before {
+	bottom: 40%;
+	left: 50%;
+	transform: translate(-50%, 50%);
+	border-width: 19px 13px 0px 13px;
+	border-color: #aaa transparent transparent transparent;
+}
+.d-pad a.down:active:before {
+	border-top-color: #333;
+}
+.d-pad a.down:hover:before {
+	bottom: 35%;
+}
+.d-pad a.left {
+	top: 50%;
+	left: 0;
+	transform: translate(0, -50%);
+	border-radius: 17% 50% 50% 17%;
+}
+.d-pad a.left:hover {
+	background: linear-gradient(-90deg, #ddd 0%, #eee 50%);
+}
+.d-pad a.left:after {
+	left: 0;
+	bottom: 0;
+	transform: translate(0, 100%);
+	border-bottom-left-radius: 50%;
+	pointer-events: none;
+}
+.d-pad a.left:before {
+	left: 40%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-width: 13px 19px 13px 0;
+	border-color: transparent #aaa transparent transparent;
+}
+.d-pad a.left:active:before {
+	border-right-color: #333;
+}
+.d-pad a.left:hover:before {
+	left: 35%;
+}
+.d-pad a.right {
+	top: 50%;
+	right: 0;
+	transform: translate(0, -50%);
+	border-radius: 50% 17% 17% 50%;
+}
+.d-pad a.right:hover {
+	background: linear-gradient(90deg, #ddd 0%, #eee 50%);
+}
+.d-pad a.right:after {
+	right: 0;
+	top: 0;
+	transform: translate(0, -100%);
+	border-top-right-radius: 50%;
+	pointer-events: none;
+}
+.d-pad a.right:before {
+	right: 40%;
+	top: 50%;
+	transform: translate(50%, -50%);
+	border-width: 13px 0 13px 19px;
+	border-color: transparent transparent transparent #aaa;
+}
+.d-pad a.right:active:before {
+	border-left-color: #333;
+}
+.d-pad a.right:hover:before {
+	right: 35%;
+}
+.d-pad.up a.up:before {
+	border-bottom-color: #333;
+}
+.d-pad.down a.down:before {
+	border-top-color: #333;
+}
+.d-pad.left a.left:before {
+	border-right-color: #333;
+}
+.d-pad.right a.right:before {
+	border-left-color: #333;
+}
+
+/*FINAL de D-PAD ====================================*/
+
+/*COMIENZO de Buttons PAD ====================================*/
+
+.set .button-pad {
+	display: inline-block;
+}
+.button-pad {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	background-color: black;
+	overflow: hidden;
+}
+.button-pad a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	width: 33.3%;
+	height: 43%;
+	line-height: 40%;
+	color: white;
+	background: #ddd;
+	text-align: center;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: 600;
+	text-shadow: 1px 1px black;
+}
+.button-pad a.left,
+.button-pad a.right {
+	width: 43%;
+	height: 33%;
+}
+.button-pad a.left {
+	top: 50%;
+	left: 0;
+	transform: translate(0, 0);
+	border-radius: 50%;
+	background-color: #f64e4b;
+}
+.button-pad a.left:active {
+	background-color: #7e2826;
+}
+.button-pad a.right {
+	top: 50%;
+	right: 0;
+	transform: translate(0, -100%);
+	border-radius: 50%;
+	background-color: #28b568;
+}
+
+.button-pad a.right:active {
+	background-color: #155f37;
+}
+
+/* Final de Buttons PAD ==================================================*/
+
+/*FINAL de Controls ================================================*/
+
+@media screen and (min-width: 600px) {
+	.controls {
+		display: none;
+		visibility: hidden;
+		height: 0px;
+	}
+
+	.superior-half,
+	.inferior-half {
+		height: 40vh;
+	}
+
+	.actions-container {
+		height: 20vh;
+	}
+
+	.message,
+	.action {
+		font-size: 20px;
+	}
+
+	.message {
+		padding: 20px;
+	}
+
+	.arrow {
+		width: 25px;
+	}
+
+	.active {
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;
+		border-left: 15px solid black;
+	}
+}
+
+@media screen and (min-width: 1020px) {
+	.inferior-half {
+		padding-left: 5%;
+	}
+	.superior-half {
+		padding-right: 5%;
+	}
+}
